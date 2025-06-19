@@ -2,55 +2,304 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ktara</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ktara - Your Ultimate Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --main-color: #00e8b4;
+      --bg-dark: #0f2027;
+      --bg-mid: #203a43;
+      --bg-light: #2c5364;
+      --text-light: #eee;
+      --text-dark: #222;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
+      margin: 0;
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-mid), var(--bg-light));
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-    h1 {
-      font-size: 3rem;
+    header {
+      background: rgba(0,0,0,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
       letter-spacing: 2px;
-      margin-bottom: 10px;
+      cursor: default;
     }
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-      color: #d0d0d0;
+    nav {
+      display: flex;
+      gap: 20px;
     }
-    .btn {
-      background: #00e8b4;
-      color: #000;
-      padding: 12px 30px;
+    nav a {
+      color: var(--text-light);
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1rem;
-      transition: background 0.3s ease;
+      transition: color 0.3s ease;
     }
-    .btn:hover {
+    nav a:hover {
+      color: var(--main-color);
+    }
+    main {
+      flex: 1;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #b6f3d6;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-primary {
+      background-color: var(--main-color);
+      color: #000;
+      padding: 15px 40px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background-color: #01c79e;
+    }
+
+    /* Products */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+    .product-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .product-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .product-details {
+      flex: 1;
+      padding: 15px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    .product-price {
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: #a7f9c9;
+    }
+    .btn-add {
+      background-color: var(--main-color);
+      border: none;
+      padding: 12px 0;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #000;
+      transition: background-color 0.25s ease;
+    }
+    .btn-add:hover {
+      background-color: #01c79e;
+    }
+
+    /* Cart Sidebar */
+    #cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 320px;
+      height: 100vh;
+      background: rgba(15, 32, 39, 0.95);
+      box-shadow: -3px 0 12px rgba(0,0,0,0.8);
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      z-index: 1100;
+    }
+    #cart-sidebar.active {
+      right: 0;
+    }
+    #cart-sidebar header {
+      padding: 20px;
+      border-bottom: 1px solid #0a181f;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--main-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #cart-close {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--main-color);
+    }
+    #cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 10px;
+    }
+    .cart-item-name {
+      flex: 1;
+    }
+    .cart-item-price {
+      margin-left: 10px;
+      color: #a7f9c9;
+    }
+    .cart-item-remove {
+      margin-left: 15px;
+      cursor: pointer;
+      color: #ff5555;
+      font-weight: 700;
+    }
+    #cart-total {
+      padding: 20px;
+      border-top: 1px solid #0a181f;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--main-color);
+      text-align: right;
+    }
+
+    /* Contact */
+    #contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    #contact label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--main-color);
+    }
+    #contact input, #contact textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    #contact textarea {
+      min-height: 120px;
+    }
+    #contact button {
+      background: var(--main-color);
+      border: none;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      color: #000;
+      font-size: 1.1rem;
+    }
+    #contact button:hover {
       background: #01c79e;
     }
-    footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #aaa;
-    }
-  </style>
-</head>
-<body>
-  <h1>Ktara</h1>
-  <p>Born to be bold. Crafted to stand out. Your next favorite brand starts here.</p>
-  <a href="https://wa.me/your-number-here" class="btn" target="_blank">Contact on WhatsApp</a>
 
-  <footer>
-    &copy; 2025 Ktara. All rights reserved.
-  </footer>
-</body>
-</html>
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      background: rgba(0,0,0,0.4);
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: block;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--main-color);
+      }
+      header {
+        justify-content: space-between;
+      }
+    }
+    @media (min-width: 769px) {
+      .mobile-menu-btn {
+        display: none;
+      }
+    }
+    /* Mobile Nav */
+    #mobile-nav {
+      display: none;
+      position: fixed;
+      top: 60px;
+      right: 0;
+      background: rgba(15, 32, 39, 0.95);
+      width: 200px;
+      border-radius: 8px 0 0 8px;
+      box-shadow: -4px 0 15px rgba(0,0,0,0.7);
+      padding: 15px 0;
+      flex-direction: column;
+     
