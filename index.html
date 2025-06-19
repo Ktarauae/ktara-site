@@ -1,384 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ktara - Born to be Bold</title>
-<style>
-  /* Reset & basics */
-  * {
-    box-sizing: border-box;
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  body {
-    background: #0e121b;
-    color: #eee;
-    line-height: 1.6;
-  }
-  a {
-    color: #ff6f61;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* Container */
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px 0;
-  }
-
-  /* Header */
-  header {
-    background: #1f2430;
-    padding: 15px 0;
-    text-align: center;
-    border-bottom: 2px solid #ff6f61;
-  }
-  header h1 {
-    font-size: 2.8rem;
-    letter-spacing: 3px;
-  }
-  header p {
-    font-style: italic;
-    margin-top: 5px;
-    color: #ff6f61;
-    font-weight: 600;
-  }
-
-  /* Navigation */
-  nav {
-    margin: 20px 0;
-    text-align: center;
-  }
-  nav a {
-    display: inline-block;
-    margin: 0 15px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 8px 12px;
-    border-radius: 6px;
-    background: #ff6f61;
-    color: #fff;
-    transition: background 0.3s ease;
-  }
-  nav a:hover {
-    background: #e6554e;
-  }
-
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, #ff6f61, #ff998a);
-    padding: 60px 20px;
-    border-radius: 12px;
-    text-align: center;
-    color: #1f2430;
-    margin-bottom: 50px;
-    box-shadow: 0 10px 30px rgba(255, 111, 97, 0.5);
-  }
-  .hero h2 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    font-weight: 900;
-  }
-  .hero p {
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  /* Products Section */
-  .products {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 25px;
-    margin-bottom: 50px;
-  }
-  .product {
-    background: #1f2430;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(255, 111, 97, 0.2);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-  .product:hover {
-    transform: scale(1.05);
-  }
-  .product img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-  .product h3 {
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
-  .product p {
-    font-size: 0.9rem;
-    color: #ccc;
-    margin-bottom: 15px;
-  }
-  .product button {
-    background: #ff6f61;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: background 0.3s ease;
-  }
-  .product button:hover {
-    background: #e6554e;
-  }
-
-  /* Cart Sidebar */
-  #cartSidebar {
-    position: fixed;
-    top: 0; right: -350px;
-    width: 320px;
-    height: 100vh;
-    background: #1f2430;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.5);
-    padding: 20px;
-    overflow-y: auto;
-    transition: right 0.4s ease;
-    z-index: 9999;
-  }
-  #cartSidebar.active {
-    right: 0;
-  }
-  #cartSidebar h2 {
-    color: #ff6f61;
-    margin-bottom: 20px;
-    font-weight: 900;
-    text-align: center;
-  }
-  #cartItems {
-    list-style: none;
-    margin-bottom: 20px;
-  }
-  #cartItems li {
-    padding: 10px 8px;
-    border-bottom: 1px solid #333;
-    color: #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  #cartItems li:last-child {
-    border-bottom: none;
-  }
-  #cartTotal {
-    font-weight: 700;
-    text-align: center;
-    color: #ff6f61;
-    margin-bottom: 20px;
-  }
-  #closeCart {
-    background: #ff6f61;
-    color: white;
-    border: none;
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-  #closeCart:hover {
-    background: #e6554e;
-  }
-
-  /* Contact Section */
-  .contact {
-    background: #1f2430;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(255, 111, 97, 0.2);
-  }
-  .contact h2 {
-    color: #ff6f61;
-    margin-bottom: 20px;
-    font-weight: 900;
-  }
-  .contact p {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-  }
-  .contact a {
-    background: #ff6f61;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 6px;
-    display: inline-block;
-    font-weight: 700;
-    transition: background 0.3s ease;
-  }
-  .contact a:hover {
-    background: #e6554e;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 15px;
-    background: #0e121b;
-    color: #777;
-    font-size: 0.9rem;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    nav a {
-      margin: 8px 6px;
-      padding: 10px 14px;
-      font-size: 1rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ktara | Born to be bold</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .hero h2 {
-      font-size: 2.4rem;
+
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
     }
-  }
-</style>
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px #fff, 0 0 20px #0ff;
+    }
+
+    p.tagline {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      font-weight: 500;
+      max-width: 600px;
+      line-height: 1.5;
+      color: #cceeff;
+      text-shadow: 0 0 5px #0ff;
+    }
+
+    a.whatsapp-btn {
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      font-size: 1.25rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    a.whatsapp-btn:hover {
+      background-color: #1ebe57;
+      box-shadow: 0 7px 20px rgba(37, 211, 102, 0.7);
+    }
+
+    a.whatsapp-btn svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #99ccff88;
+    }
+
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p.tagline {
+        font-size: 1rem;
+      }
+
+      a.whatsapp-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
   <h1>Ktara</h1>
-  <p>Born to be bold. Crafted to stand out.</p>
-</header>
+  <p class="tagline">
+    Born to be bold. Crafted to stand out. Your next favorite brand starts here.
+  </p>
 
-<nav>
-  <a href="#products">Products</a>
-  <a href="#contact">Contact</a>
-  <a href="#" id="openCartBtn">Cart 🛒</a>
-</nav>
+  <a href="https://wa.me/yourwhatsappnumber" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Contact on WhatsApp">
+    <!-- WhatsApp SVG icon -->
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M20.52 3.48a11.91 11.91 0 0 0-16.82 16.82l-1.68 6.12 6.3-1.65a11.91 11.91 0 0 0 12.2-21.29zm-8.48 16.3a8.11 8.11 0 0 1-4.1-1.18l-.3-.18-2.44.64.65-2.38-.2-.3a8.17 8.17 0 0 1 3.79-13.61 8.12 8.12 0 0 1 5.75 14.4 8.07 8.07 0 0 1-3.35 1.63zM16.3 13.7c-.23-.12-1.36-.67-1.57-.74-.21-.08-.36-.12-.5.12-.14.24-.55.74-.68.9-.12.15-.25.17-.48.06-.23-.12-1-.37-1.9-1.17-.7-.62-1.17-1.38-1.3-1.61-.12-.24-.01-.37.09-.49.1-.1.23-.26.34-.39.11-.14.15-.24.23-.4.08-.15.04-.28-.02-.39-.06-.12-.5-1.22-.7-1.68-.18-.44-.36-.38-.5-.38-.13 0-.27-.01-.42-.01-.15 0-.39.06-.6.29s-.79.77-.79 1.87c0 1.1.81 2.17.92 2.32.12.15 1.58 2.4 3.83 3.36 2.25.95 2.25.63 2.66.59.42-.04 1.36-.56 1.55-1.1.19-.53.19-.99.14-1.1-.04-.1-.21-.15-.44-.27z"/>
+    </svg>
+    Contact on WhatsApp
+  </a>
 
-<section class="hero">
-  <h2>Welcome to Ktara</h2>
-  <p>Your next favorite brand starts here.</p>
-</section>
-
-<section id="products" class="container">
-  <h2 style="color:#ff6f61; text-align:center; margin-bottom:30px; font-weight:900;">Our Products</h2>
-  
-  <div class="products">
-
-    <div class="product" data-name="Bold Mug" data-price="15">
-      <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=400&q=80" alt="Bold Mug" />
-      <h3>Bold Mug</h3>
-      <p>Start your day with boldness. Perfect for coffee lovers.</p>
-      <button class="addToCartBtn">Add to Cart - $15</button>
-    </div>
-
-    <div class="product" data-name="Ktara T-Shirt" data-price="25">
-      <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Ktara T-Shirt" />
-      <h3>Ktara T-Shirt</h3>
-      <p>Wear your attitude. Soft cotton with bold design.</p>
-      <button class="addToCartBtn">Add to Cart - $25</button>
-    </div>
-
-    <div class="product" data-name="Signature Cap" data-price="20">
-      <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?auto=format&fit=crop&w=400&q=80" alt="Signature Cap" />
-      <h3>Signature Cap</h3>
-      <p>Top off your style with a classic signature cap.</p>
-      <button class="addToCartBtn">Add to Cart - $20</button>
-    </div>
-
-  </div>
-</section>
-
-<!-- Cart Sidebar -->
-<aside id="cartSidebar">
-  <h2>Your Cart</h2>
-  <ul id="cartItems"></ul>
-  <div id="cartTotal"></div>
-  <button id="closeCart">Close Cart</button>
-</aside>
-
-<section id="contact" class="contact container">
-  <h2>Contact Us</h2>
-  <p>Questions? Ready to order? Reach out to us directly on WhatsApp.</p>
-  <a href="https://wa.me/971500000000" target="_blank" rel="noopener">Chat on WhatsApp</a>
-</section>
-
-<footer>
-  &copy; 2025 Ktara. All rights reserved.
-</footer>
-
-<script>
-  // Cart functionality
-  const cart = [];
-  const cartSidebar = document.getElementById('cartSidebar');
-  const cartItemsEl = document.getElementById('cartItems');
-  const cartTotalEl = document.getElementById('cartTotal');
-  const openCartBtn = document.getElementById('openCartBtn');
-  const closeCartBtn = document.getElementById('closeCart');
-  const addToCartButtons = document.querySelectorAll('.addToCartBtn');
-
-  function updateCartUI() {
-    cartItemsEl.innerHTML = '';
-    if (cart.length === 0) {
-      cartItemsEl.innerHTML = '<li>Your cart is empty.</li>';
-      cartTotalEl.textContent = '';
-      return;
-    }
-    let total = 0;
-    cart.forEach((item, index) => {
-      const li = document.createElement('li');
-      li.textContent = `${item.name} - $${item.price}`;
-      const removeBtn = document.createElement('button');
-      removeBtn.textContent = '×';
-      removeBtn.style.marginLeft = '10px';
-      removeBtn.style.background = 'transparent';
-      removeBtn.style.border = 'none';
-      removeBtn.style.color = '#ff6f61';
-      removeBtn.style.fontWeight = '700';
-      removeBtn.style.cursor = 'pointer';
-      removeBtn.onclick = () => {
-        cart.splice(index, 1);
-        updateCartUI();
-      };
-      li.appendChild(removeBtn);
-      cartItemsEl.appendChild(li);
-      total += item.price;
-    });
-    cartTotalEl.textContent = `Total: $${total}`;
-  }
-
-  addToCartButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const product = button.parentElement;
-      const name = product.getAttribute('data-name');
-      const price = parseInt(product.getAttribute('data-price'));
-      cart.push({ name, price });
-      updateCartUI();
-      cartSidebar.classList.add('active');
-    });
-  });
-
-  openCartBtn.addEventListener('click', e => {
-    e.preventDefault();
-    cartSidebar.classList.add('active');
-  });
-
-  closeCartBtn.addEventListener('click', () => {
-    cartSidebar.classList.remove('active');
-  });
-
-  // Close cart if clicked outside sidebar
-  window.addEventListener('click', e => {
-    if (!cartSidebar.contains(e.target) && !openCartBtn.contains(e.target)) {
-      cartSidebar.classList.remove('active');
-    }
-  });
-</script>
+  <footer>© 2025 Ktara. All rights reserved.</footer>
 
 </body>
 </html>
